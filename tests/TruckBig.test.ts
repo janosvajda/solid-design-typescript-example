@@ -6,11 +6,17 @@ import {TruckBig} from '../src/lib/class/TruckBig';
 
 let truckBig = new TruckBig();
 
-describe('truckBig setId getId', function () {
-    it('StandardParcel getters tests', function () {
+describe('truckBig tests', function () {
+    it('truckBig setId getId', function () {
         let truckId = 'ABC-12-345';
         truckBig.setId(truckId);
-
         assert.strictEqual(truckBig.getId(), truckId);
     });
+
+    it('truckBig setWeight getWeight', function () {
+        let truckWeight = 4567.4; //it is kg
+        truckBig.setWeight(truckWeight);
+        assert.strictEqual(truckBig.getWeight(), truckWeight);
+    });
+
 });

@@ -18,7 +18,7 @@ export interface IVehicle {
     setId(value: string);
 
     /**
-     * Vehicle weight without parcels.
+     * Vehicle weight without parcels in kilogram
      * @var number
      */
     getWeight(): number;
