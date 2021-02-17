@@ -25,9 +25,8 @@ export class TruckBig implements IVehicle {
         this.parcels = new Array<IParcel>();
     }
 
-    addParcel(value: IParcel) {
-        value.getValidator().validate();
-        this.parcels.push(value);
+    addParcel(parcel: IParcel) {
+        this.parcels.push(parcel);
     }
 
     /**
@@ -63,11 +62,39 @@ export class TruckBig implements IVehicle {
         this.weight = value;
     }
 
-    getLoadedParcelWeight():number {
+    /**
+     * Weight of all loaded parcels.
+     */
+    getLoadedParcelWeight(): number {
         let result = 0;
-        Object.values(this.getParcels()).forEach(element => {
-            result += element.getWeight();
+        Object.values(this.getParcels()).forEach(parcel => {
+            result += parcel.getWeight();
         })
         return result;
     }
+
+    /**
+     * Count of all loaded parcels.
+     */
+    getLoadedParcelCount(): number {
+        return Object.values(this.getParcels()).length
+    }
+
+    /**
+     * Parcels checking on the vehicle.
+     */
+    verify(): boolean {
+        Object.values(this.getParcels()).forEach(parcel => {
+            try {
+                parcel.getValidator().validate();
+            } catch (e) {
+            }
+        });
+
+        //Truck weight must be added
+        if (this.getWeight() === undefined) return false;
+
+        return true;
+    }
+
 }

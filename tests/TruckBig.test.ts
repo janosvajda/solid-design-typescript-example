@@ -69,7 +69,7 @@ describe('truckBig tests', function () {
         assert.strictEqual(2, Object.values(parcels).length);
     });
 
-    it('truckBig getparcels', function () {
+    it('truckBig getLoadedParcelWeight', function () {
 
         let truckBigTestCountOfParcels = new TruckBig();
 
@@ -84,7 +84,133 @@ describe('truckBig tests', function () {
         truckBigTestCountOfParcels.addParcel(parcel1);
         truckBigTestCountOfParcels.addParcel(parcel2);
 
-        let weightOfAllParcelstOnTruck = truckBigTestCountOfParcels.getLoadedParcelWeight();
-        assert.strictEqual((parcel1.getWeight() + parcel2.getWeight()), weightOfAllParcelstOnTruck);
+        assert.strictEqual((parcel1.getWeight() + parcel2.getWeight()), truckBigTestCountOfParcels.getLoadedParcelWeight());
+    });
+
+    it('truckBig getLoadedParcelCount', function () {
+
+        let truckBigTestCountOfParcels = new TruckBig();
+
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(14.5);
+
+        let parcel2 = new StandardParcel();
+        parcel2.setParcelId(2);
+        parcel2.setWeight(12.3);
+
+        let parcel3 = new StandardParcel();
+        parcel3.setParcelId(3);
+        parcel3.setWeight(4.11);
+
+        let parcel4 = new StandardParcel();
+        parcel4.setParcelId(2);
+        parcel4.setWeight(0.16);
+
+        truckBigTestCountOfParcels.addParcel(parcel1);
+        truckBigTestCountOfParcels.addParcel(parcel2);
+        truckBigTestCountOfParcels.addParcel(parcel3);
+        truckBigTestCountOfParcels.addParcel(parcel4);
+
+        assert.strictEqual(4, truckBigTestCountOfParcels.getLoadedParcelCount());
+    });
+
+    it('truckBig verify === true', function () {
+
+        let truckBigTestCountOfParcels = new TruckBig();
+
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(14.5);
+
+        let parcel2 = new StandardParcel();
+        parcel2.setParcelId(2);
+        parcel2.setWeight(12.3);
+
+        let parcel3 = new StandardParcel();
+        parcel3.setParcelId(3);
+        parcel3.setWeight(4.11);
+
+        truckBigTestCountOfParcels.setWeight(1234.5); //truck weight must be added
+
+        truckBigTestCountOfParcels.addParcel(parcel1);
+        truckBigTestCountOfParcels.addParcel(parcel2);
+        truckBigTestCountOfParcels.addParcel(parcel3);
+
+        assert.strictEqual(true, truckBigTestCountOfParcels.verify());
+    });
+
+    it('truckBig verify === false because one of the parcel is not valid', function () {
+
+        let truckBigTestVerifyFailed = new TruckBig();
+
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(14.5);
+
+        let parcel2 = new StandardParcel();
+        parcel2.setParcelId(2);
+        parcel2.setWeight(12.3);
+
+        let parcel3 = new StandardParcel();
+        parcel3.setParcelId(3);
+
+        truckBigTestVerifyFailed.addParcel(parcel1);
+        truckBigTestVerifyFailed.addParcel(parcel2);
+        truckBigTestVerifyFailed.addParcel(parcel3);
+
+        try {
+            truckBigTestVerifyFailed.verify();
+        } catch (e) {
+            assert.strictEqual(e, 'Parcel weight is required');
+        }
+    });
+
+    it('truckBig verify === false because truck weight is not given', function () {
+
+        let truckBigTestVerifyFailed = new TruckBig();
+
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(14.5);
+
+        let parcel2 = new StandardParcel();
+        parcel2.setParcelId(2);
+        parcel2.setWeight(12.3);
+
+        truckBigTestVerifyFailed.addParcel(parcel1);
+        truckBigTestVerifyFailed.addParcel(parcel2);
+
+        try {
+            let valid = truckBigTestVerifyFailed.verify();
+            assert.strictEqual(false, valid);
+
+        } catch (e) {
+            assert.strictEqual(e, 'Parcel weight is required');
+        }
+    });
+
+    it('truckBig verify === false because trucks parcels IDs are not unique', function () {
+
+        let truckBigTestVerifyFailed = new TruckBig();
+
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(14.5);
+
+        let parcel2 = new StandardParcel();
+        parcel2.setParcelId(2);
+        parcel2.setWeight(12.3);
+
+        truckBigTestVerifyFailed.addParcel(parcel1);
+        truckBigTestVerifyFailed.addParcel(parcel2);
+
+        try {
+            let valid = truckBigTestVerifyFailed.verify();
+            assert.strictEqual(false, valid);
+
+        } catch (e) {
+            assert.strictEqual(e, 'Parcel weight is required');
+        }
     });
 });

@@ -1,5 +1,4 @@
 import {IParcel} from '../interface/IParcel';
-import {IValidateParcel} from "./IValidateParcel";
 
 /**
  * Vehicle interface.
@@ -52,4 +51,13 @@ export interface IVehicle {
      */
     getLoadedParcelWeight(): number
 
+    /**
+     * Count of all loaded parcels.
+     */
+    getLoadedParcelCount(): number
+
+    /**
+     * Verify the whole vehicle.
+     */
+    verify() : boolean
 }
