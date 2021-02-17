@@ -1,5 +1,6 @@
 import {IParcel} from '../interface/IParcel';
 import {IVehicle} from '../interface/IVehicle';
+import {split} from "ts-node";
 
 /**
  * @class TruckBig
@@ -43,6 +44,10 @@ export class TruckBig implements IVehicle {
         return this.parcels;
     }
 
+    setParcels(parcels) {
+        this.parcels = parcels;
+    }
+
     /**
      * Returns by the vehicle weight without parcels.
      */
@@ -50,8 +55,17 @@ export class TruckBig implements IVehicle {
         return this.weight;
     }
 
+    /**
+     * Remove parcel from the vehicle.
+     * @param id
+     */
     removeParcel(id: number) {
-        this.parcels.shift()
+
+        const removeItem = (removeId) => {
+            const res = Object.values(this.getParcels()).filter(obj => obj.id !== removeId);
+            return res;
+        }
+        this.setParcels(removeItem(id));
     }
 
     setId(value: string) {

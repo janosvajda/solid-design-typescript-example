@@ -215,4 +215,31 @@ describe('truckBig tests', function () {
             assert.strictEqual(e, 'Parcel weight is required');
         }
     });
+
+    it('truckBig delete parcel', function () {
+
+        let truckBigTest = new TruckBig();
+
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(14.5);
+
+        let parcel2 = new StandardParcel();
+        parcel2.setParcelId(2);
+        parcel2.setWeight(12.3);
+
+        truckBigTest.addParcel(parcel1);
+        truckBigTest.addParcel(parcel2);
+
+        truckBigTest.setWeight(1234.5); //truck weight must be added
+
+        truckBigTest.removeParcel(2);
+
+        console.log('BDSKV', truckBigTest.getLoadedParcelCount())
+
+        assert.strictEqual(1, truckBigTest.getLoadedParcelCount());
+
+
+
+    });
 });

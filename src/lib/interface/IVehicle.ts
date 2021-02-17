@@ -47,6 +47,11 @@ export interface IVehicle {
     getParcels(): object;
 
     /**
+     * Set parcels
+     */
+    setParcels(parcels: Array<IParcel>)
+
+    /**
      * Weight of all loaded parcels.
      */
     getLoadedParcelWeight(): number
