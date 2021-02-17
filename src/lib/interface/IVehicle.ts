@@ -57,7 +57,14 @@ export interface IVehicle {
     getLoadedParcelCount(): number
 
     /**
+     * Checks parcel Ids uniqueness.
+     */
+    hasParcelsUniqueId(): boolean
+
+    /**
      * Verify the whole vehicle.
      */
-    verify() : boolean
+    checkParcels() : boolean
+
+
 }

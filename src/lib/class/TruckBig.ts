@@ -81,9 +81,24 @@ export class TruckBig implements IVehicle {
     }
 
     /**
+     * Each parcels must have unique parcelId on the truck.
+     */
+    hasParcelsUniqueId() {
+        let uniqueItems = []
+        Object.values(this.getParcels()).forEach(parcel => {
+            uniqueItems.push(parcel.getParcelId());
+        });
+        if (new Set(uniqueItems).size !== uniqueItems.length) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Parcels checking on the vehicle.
      */
-    verify(): boolean {
+    checkParcels(): boolean {
+
         Object.values(this.getParcels()).forEach(parcel => {
             try {
                 parcel.getValidator().validate();
@@ -92,9 +107,13 @@ export class TruckBig implements IVehicle {
         });
 
         //Truck weight must be added
-        if (this.getWeight() === undefined) return false;
+        if (this.getWeight() === undefined || this.getWeight() === null) return false;
+
+        //Each parcel must have unique parcel ID.
+        if (!this.hasParcelsUniqueId()) return false;
 
         return true;
     }
+
 
 }
