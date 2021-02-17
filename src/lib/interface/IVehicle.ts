@@ -47,4 +47,9 @@ export interface IVehicle {
      */
     getParcels(): object;
 
+    /**
+     * Weight of all loaded parcels.
+     */
+    getLoadedParcelWeight(): number
+
 }

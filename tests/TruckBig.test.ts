@@ -68,4 +68,23 @@ describe('truckBig tests', function () {
         let parcels = truckBigTestCountOfParcels.getParcels();
         assert.strictEqual(2, Object.values(parcels).length);
     });
+
+    it('truckBig getparcels', function () {
+
+        let truckBigTestCountOfParcels = new TruckBig();
+
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(14.5);
+
+        let parcel2 = new StandardParcel();
+        parcel2.setParcelId(2);
+        parcel2.setWeight(22.72);
+
+        truckBigTestCountOfParcels.addParcel(parcel1);
+        truckBigTestCountOfParcels.addParcel(parcel2);
+
+        let weightOfAllParcelstOnTruck = truckBigTestCountOfParcels.getLoadedParcelWeight();
+        assert.strictEqual((parcel1.getWeight() + parcel2.getWeight()), weightOfAllParcelstOnTruck);
+    });
 });

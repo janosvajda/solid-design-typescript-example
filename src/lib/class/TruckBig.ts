@@ -1,6 +1,5 @@
 import {IParcel} from '../interface/IParcel';
 import {IVehicle} from '../interface/IVehicle';
-import {IValidateParcel} from "../interface/IValidateParcel";
 
 /**
  * @class TruckBig
@@ -62,5 +61,13 @@ export class TruckBig implements IVehicle {
 
     setWeight(value: number) {
         this.weight = value;
+    }
+
+    getLoadedParcelWeight():number {
+        let result = 0;
+        Object.values(this.getParcels()).forEach(element => {
+            result += element.getWeight();
+        })
+        return result;
     }
 }
