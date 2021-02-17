@@ -5,8 +5,10 @@ const formData = require("express-form-data");
 var bodyParser = require('body-parser');
 
 import {TruckBig} from '../src/lib/class/TruckBig';
+import {StandardParcel} from '../src/lib/class/StandardParcel';
 
 let trucks = [];
+let parcels = [];
 
 // Create a new express app instance
 const app: express.Application = express();
@@ -39,30 +41,29 @@ router.post('/trucks', function (req, res) {
             truck.setWeight(req.body.weight);
             trucks.push(truck);
         }
-
         console.log('All trucks:', trucks);
-
     }
 
     res.end("yes" + req.body.id);
 });
 
-router.post('/parcel', function (req, res) {
-    console.log(req.body);
+router.post('/parcels', function (req, res) {
     if (req.body.id !== undefined && req.body.weight !== undefined) {
 
-        let searchTruckByID = trucks.find(x => x.id === req.body.id);
-        console.log('searchTruckByID', searchTruckByID)
+        let parcelCheckId = parcels.find(x => x.id === req.body.id);
+        console.log('parcelCheckId', parcelCheckId)
 
-        if (searchTruckByID === undefined) {
-            let truck = new TruckBig();
-            truck.setId(req.body.id);
-            truck.setWeight(req.body.weight);
-            trucks.push(truck);
+        if (parcelCheckId === undefined) {
+            let parcel = new StandardParcel();
+
+            parcel.setParcelId(req.body.id);
+            parcel.setWeight(req.body.weight);
+            parcel.setLength(req.body.length);
+            parcel.setDepth(req.body.depth);
+            parcels.push(parcel);
         }
 
-        console.log('All trucks:', trucks);
-
+        console.log('All parcels:', parcels);
     }
 
     res.end("yes" + req.body.id);
