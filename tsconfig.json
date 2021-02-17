@@ -5,7 +5,7 @@
       "*": [ "./*" ],
       "test/*": ["./test/specs/*"]
     },
-    "types": ["node", "jest", "mocha","@wdio/sync", "@wdio/mocha-framework"]
+    "types": ["node", "jest", "mocha", "express"]
   },
   "include": [
     "./tests/*.ts",
