@@ -5,6 +5,11 @@ export class StandardParcel implements IParcel {
     /**
      * @private
      */
+    private id: number;
+
+    /**
+     * @private
+     */
     private label: string;
 
     /**
@@ -26,6 +31,7 @@ export class StandardParcel implements IParcel {
      * @private
      */
     private depth: number
+
 
     getLabel(): string {
         return this.label;
@@ -65,6 +71,14 @@ export class StandardParcel implements IParcel {
 
     setDepth(value: number) {
         this.depth = value;
+    }
+
+    getParcelId(): number {
+        return this.id;
+    }
+
+    setParcelId(value: number) {
+        this.id = value;
     }
 
 }

@@ -1,5 +1,9 @@
 export interface IParcel {
 
+    setParcelId(value: number);
+
+    getParcelId(): number;
+
     getLabel(): string;
 
     setLabel(value: string);

@@ -14,15 +14,29 @@ describe('StandardParcel setLabel getLabel', function () {
     });
 
     it('StandardParcel dimensions', function () {
-        let parcelWeight = 10;
+        let parcelDepth = 10.42;
         let parcelWidth = 12;
-        let parcelLength = 15;
-        s.setWeight(parcelWeight);
+        let parcelLength = 15.1;
+        s.setDepth(parcelDepth);
         s.setWidth(parcelWidth);
         s.setLength(parcelLength);
 
-        assert.strictEqual(s.getWeight(), parcelWeight);
+        assert.strictEqual(s.getDepth(), parcelDepth);
         assert.strictEqual(s.getWidth(), parcelWidth);
         assert.strictEqual(s.getLength(), parcelLength);
+    });
+
+    it('StandardParcel parcelWeight', function () {
+        let parcelWeight = 10.342;
+        s.setWeight(parcelWeight);
+
+        assert.strictEqual(s.getWeight(), parcelWeight);
+    });
+
+    it('StandardParcel parcelId', function () {
+        let id = 1;
+        s.setParcelId(id);
+
+        assert.strictEqual(s.getParcelId(), id);
     });
 });
