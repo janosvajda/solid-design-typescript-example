@@ -42,8 +42,8 @@ export interface IVehicle {
     removeParcel(id: number);
 
     /**
-     * List all parcels.
+     * Retunrs by all parcels.
      */
-    listParcels(): object;
+    getParcels(): object;
 
 }
