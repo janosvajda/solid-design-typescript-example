@@ -1,7 +1,7 @@
 import {IParcel} from '../interface/IParcel';
 
 /**
- * Vehicle interface.
+ * @interface IVehicle.
  */
 export interface IVehicle {
 

@@ -1,5 +1,8 @@
 import {IValidateParcel} from '../interface/IValidateParcel';
 
+/**
+ * @interface IParcel
+ */
 export interface IParcel {
 
     /**

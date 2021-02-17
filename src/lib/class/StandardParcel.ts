@@ -1,5 +1,9 @@
 import {IParcel} from '../interface/IParcel';
 import {ValidateStandardParcel} from '../class/ValidateStandardParcel';
+
+/**
+ * @class StandardParcel
+ */
 export class StandardParcel implements IParcel {
 
     /**
