@@ -235,11 +235,15 @@ describe('truckBig tests', function () {
 
         truckBigTest.removeParcel(2);
 
-        console.log('BDSKV', truckBigTest.getLoadedParcelCount())
-
         assert.strictEqual(1, truckBigTest.getLoadedParcelCount());
 
+        truckBigTest.removeParcel(1);
 
+        assert.strictEqual(0, truckBigTest.getLoadedParcelCount());
+
+        truckBigTest.removeParcel(2);
+
+        assert.strictEqual(0, truckBigTest.getLoadedParcelCount());
 
     });
 });
