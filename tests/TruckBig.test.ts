@@ -28,10 +28,38 @@ describe('truckBig tests', function () {
         assert.strictEqual(truckBig.getWeight(), truckWeight);
     });
 
-    it('truckBig addParcels getParcels', function () {
+    it('truckBig parcel validation failing', function () {
         let parcel1 = new StandardParcel();
-        let parcel2 = new StandardParcel();
+        try {
+            parcel1.getValidator().validate();
+            truckBig.addParcel(parcel1);
+        } catch (e) {
+            assert.strictEqual(e, 'Parcel ID is required');
+        }
+    });
 
-        truckBig.addParcel(parcel1);
+    it('truckBig parcel validation OK', function () {
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(12.45);
+        try {
+            parcel1.getValidator().validate();
+            truckBig.addParcel(parcel1);
+        } catch (e) {
+            assert.strictEqual(e, null);
+        }
+    });
+
+    it('truckBig getparcels', function () {
+        
+        let parcel1 = new StandardParcel();
+        parcel1.setParcelId(1);
+        parcel1.setWeight(12.45);
+        try {
+            parcel1.getValidator().validate();
+            truckBig.addParcel(parcel1);
+        } catch (e) {
+            assert.strictEqual(e, null);
+        }
     });
 });

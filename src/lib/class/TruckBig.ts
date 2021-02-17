@@ -1,6 +1,10 @@
 import {IParcel} from '../interface/IParcel';
 import {IVehicle} from '../interface/IVehicle';
+import {IValidateParcel} from "../interface/IValidateParcel";
 
+/**
+ * @class TruckBig
+ */
 export class TruckBig implements IVehicle {
 
     /**
@@ -49,6 +53,4 @@ export class TruckBig implements IVehicle {
     setWeight(value: number) {
         this.weight = value;
     }
-
-
 }

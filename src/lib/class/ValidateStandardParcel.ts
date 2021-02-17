@@ -1,8 +1,10 @@
 import {IValidateParcel} from '../interface/IValidateParcel';
 
 import {StandardParcel} from '../class/StandardParcel';
-import {IParcel} from "../interface/IParcel";
 
+/**
+ * @class ValidateStandardParcel
+ */
 export class ValidateStandardParcel implements IValidateParcel {
 
     /**
@@ -15,9 +17,16 @@ export class ValidateStandardParcel implements IValidateParcel {
     }
 
     validate() {
-        console.log('FASZOM', this.parcel)
+        this.checkParcelId();
+        this.checkParcelWeight();
     }
 
+    checkParcelId() {
+        if (this.parcel.getParcelId() === undefined) throw 'Parcel ID is required';
+    }
 
+    checkParcelWeight() {
+        if (this.parcel.getWeight() === undefined) throw 'Parcel weight is required';
+    }
 
 }

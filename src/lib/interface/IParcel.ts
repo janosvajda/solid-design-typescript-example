@@ -1,3 +1,5 @@
+import {IValidateParcel} from '../interface/IValidateParcel';
+
 export interface IParcel {
 
     /**
@@ -71,5 +73,17 @@ export interface IParcel {
      * @var number
      */
     setDepth(value: number);
+
+    /**
+     * Return by parcel's validator class name.
+     * @var number
+     */
+    getValidatorName(): string;
+
+    /**
+     * Return by parcel's validator.
+     * @var number
+     */
+    getValidator(): IValidateParcel;
 
 }

@@ -4,5 +4,6 @@ export interface IValidateParcel {
 
     setParcel(value: IParcel);
     validate();
+    checkParcelId();
 
 }

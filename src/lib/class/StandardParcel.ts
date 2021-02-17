@@ -1,4 +1,5 @@
 import {IParcel} from '../interface/IParcel';
+import {ValidateStandardParcel} from '../class/ValidateStandardParcel';
 
 export class StandardParcel implements IParcel {
 
@@ -80,5 +81,16 @@ export class StandardParcel implements IParcel {
     setParcelId(value: number) {
         this.id = value;
     }
+
+    getValidatorName(): string {
+        return 'ValidateStandardParcel';
+    }
+
+    getValidator(): ValidateStandardParcel {
+        let validator = new ValidateStandardParcel();
+        validator.setParcel(this);
+        return validator;
+    }
+
 
 }

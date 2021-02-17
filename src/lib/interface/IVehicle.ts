@@ -1,4 +1,5 @@
 import {IParcel} from '../interface/IParcel';
+import {IValidateParcel} from "./IValidateParcel";
 
 /**
  * Vehicle interface.

@@ -12,11 +12,27 @@ let parcel2 = new StandardParcel();
 
 let validateStandardParcel = new ValidateStandardParcel();
 
-describe('truckBig tests', function () {
+describe('ValidateStandardParcel tests', function () {
 
+    it('ValidateStandardParcel validation ID required failing', function () {
+        try {
+            validateStandardParcel.setParcel(parcel1);
+            validateStandardParcel.validate();
+        } catch (e) {
+            console.log(e);
+            assert.strictEqual(e, 'Parcel ID is required');
+        }
+    });
 
-    it('truckBig addParcels getParcels', function () {
-        validateStandardParcel.setParcel(parcel1);
-        validateStandardParcel.validate();
+    it('ValidateStandardParcel validation weight required failing', function () {
+        try {
+            parcel1.setParcelId(123456)
+            validateStandardParcel.setParcel(parcel1);
+            validateStandardParcel.setParcel(parcel1);
+            validateStandardParcel.validate();
+        } catch (e) {
+            console.log(e);
+            assert.strictEqual(e, 'Parcel weight is required');
+        }
     });
 });

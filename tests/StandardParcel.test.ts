@@ -36,7 +36,6 @@ describe('StandardParcel setLabel getLabel', function () {
     it('StandardParcel parcelId', function () {
         let id = 1;
         s.setParcelId(id);
-
         assert.strictEqual(s.getParcelId(), id);
     });
 });
