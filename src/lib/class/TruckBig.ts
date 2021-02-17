@@ -18,6 +18,10 @@ export class TruckBig implements IVehicle {
      */
     private weight: number;
 
+    constructor() {
+        this.parcels = new Array<IParcel>();
+    }
+
     addParcel(value: IParcel) {
         this.parcels.push(value);
     }

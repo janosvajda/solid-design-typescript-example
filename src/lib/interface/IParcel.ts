@@ -23,4 +23,5 @@ export interface IParcel {
     getDepth(): number;
 
     setDepth(value: number);
+
 }
