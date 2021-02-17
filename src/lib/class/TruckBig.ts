@@ -27,17 +27,27 @@ export class TruckBig implements IVehicle {
     }
 
     addParcel(value: IParcel) {
+        value.getValidator().validate();
         this.parcels.push(value);
     }
 
+    /**
+     * Return by truck id.
+     */
     getId(): string {
         return this.id;
     }
 
+    /**
+     * Returns by all added parcels.
+     */
     getParcels(): object {
         return this.parcels;
     }
 
+    /**
+     * Returns by the vehicle weight without parcels.
+     */
     getWeight(): number {
         return this.weight;
     }

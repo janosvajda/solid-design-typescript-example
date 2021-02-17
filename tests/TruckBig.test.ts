@@ -62,15 +62,10 @@ describe('truckBig tests', function () {
         parcel2.setParcelId(2);
         parcel2.setWeight(32.45);
 
-        parcel1.getValidator().validate();
         truckBigTestCountOfParcels.addParcel(parcel1);
-
-        parcel2.getValidator().validate();
         truckBigTestCountOfParcels.addParcel(parcel2);
 
         let parcels = truckBigTestCountOfParcels.getParcels();
-        console.log(Object.values(parcels).length);
         assert.strictEqual(2, Object.values(parcels).length);
-
     });
 });
