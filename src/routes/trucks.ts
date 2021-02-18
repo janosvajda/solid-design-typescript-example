@@ -52,21 +52,48 @@ module.exports = function (app, router, trucks, parcels) {
         res.setHeader('Content-Type', 'application/json');
         if (req.body.truck_id !== undefined && req.body.parcel_id !== undefined) {
             let truck = trucks.find(t => t.id === req.body.truck_id);
-            let parcel = parcels.find(p => p.id === req.body.parcel_id);
-            try {
-                let valid = truck.checkParcels();
-                if (valid) {
-                    truck.addParcel(parcel);
-                    res.write(JSON.stringify(truck));
+            if (truck) {
+                let parcel = parcels.find(p => p.id === req.body.parcel_id);
+                if (parcel) {
+                    try {
+                        let valid = truck.checkParcels();
+                        if (valid) {
+                            truck.addParcel(parcel);
+                            res.write(JSON.stringify(truck));
+                        } else {
+                            res.write(JSON.stringify({'error:': 'Parcel is not valid: check parcel weight, please. It is required.'}));
+                        }
+                    } catch (e) {
+                        res.write(e);
+                    }
                 } else {
-                    res.write(JSON.stringify({'error:': 'Parcel is not valid: check parcel weight, please. It is required.'}));
+                    res.write(JSON.stringify({'error:': 'Parcel does not exist.'}));
                 }
-            } catch (e) {
-                res.write(e);
+            } else {
+                res.write(JSON.stringify({'error:': 'Truck does not exist.'}));
             }
-
             res.end();
         }
-    })
+    });
 
-    }
+    /**
+     * Delete parcel from the vehicle.
+     */
+    router.delete('/trucks', function (req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        let truck = trucks.find(t => t.id === req.body.truck_id);
+        if (truck){
+            let parcel = parcels.find(p => p.id === req.body.parcel_id);
+            if (parcel) {
+                truck.removeParcel(parcel.getParcelId());
+                res.write(JSON.stringify({'success:': 'Parcel has been deleted.'}));
+            } else {
+                res.write(JSON.stringify({'error:': 'Parcel does not exist.'}));
+            }
+        } else {
+            res.write(JSON.stringify({'error:': 'Truck does not exist.'}));
+        }
+        res.end();
+    });
+
+}
