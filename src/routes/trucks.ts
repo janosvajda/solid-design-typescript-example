@@ -11,7 +11,7 @@ module.exports = function (app, router, trucks, parcels) {
 
         trucks.forEach(truck => {
             let truckLoadedParcelWeight = truck.getLoadedParcelWeight();
-            truck.truckFullWeight = Number(truck.getWeight()) + Number(truck.loadedParcelsWeight);
+            truck.truckFullWeight = Number(truck.getWeight()) + Number(truckLoadedParcelWeight);
             truck.parcelWeight = truckLoadedParcelWeight;
             truck.parcelCount = Number(truck.getLoadedParcelCount());
             trucksFormatted.push(truck);

@@ -91,7 +91,7 @@ export class BaseVehicle implements IVehicle {
         Object.values(this.getParcels()).forEach(parcel => {
             result += Number(parcel.getWeight());
         })
-        return result;
+        return Number(result);
     }
 
     /**
