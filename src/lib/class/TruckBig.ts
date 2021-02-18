@@ -1,6 +1,5 @@
 import {IParcel} from '../interface/IParcel';
 import {IVehicle} from '../interface/IVehicle';
-import {split} from "ts-node";
 
 /**
  * @class TruckBig
@@ -33,9 +32,6 @@ export class TruckBig implements IVehicle {
 
         if ( parcelItem === undefined) {
             this.parcels.push(parcel);
-            console.log('PINA', this.parcels)
-            console.log('GECI', parcel)
-
         } else {
              throw 'Parcel has been added to this vehicle';
         }
