@@ -6,7 +6,18 @@ module.exports = function (app, router, trucks, parcels) {
      */
     app.get('/trucks', function (req, res) {
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(trucks));
+
+        let trucksFormatted = [];
+
+        trucks.forEach(truck => {
+            let truckLoadedParcelWeight = truck.getLoadedParcelWeight();
+            truck.loadedParcelsWeight = truckLoadedParcelWeight;
+            truck.truckLoadedWeight = Number(truck.getWeight()) + Number(truck.loadedParcelsWeight);
+            trucksFormatted.push(truck);
+        });
+
+
+        res.end(JSON.stringify(trucksFormatted));
     });
 
     /**

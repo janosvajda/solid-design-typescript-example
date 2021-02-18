@@ -89,7 +89,7 @@ export class TruckBig implements IVehicle {
     getLoadedParcelWeight(): number {
         let result = 0;
         Object.values(this.getParcels()).forEach(parcel => {
-            result += parcel.getWeight();
+            result += Number(parcel.getWeight());
         })
         return result;
     }
