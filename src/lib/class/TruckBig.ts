@@ -33,6 +33,9 @@ export class TruckBig implements IVehicle {
 
         if ( parcelItem === undefined) {
             this.parcels.push(parcel);
+            console.log('PINA', this.parcels)
+            console.log('GECI', parcel)
+
         } else {
              throw 'Parcel has been added to this vehicle';
         }

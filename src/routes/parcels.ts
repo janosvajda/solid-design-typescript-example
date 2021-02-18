@@ -6,6 +6,7 @@ module.exports = function (app, router, parcels) {
      * List all parcels.
      */
     app.get('/parcels', function (req, res) {
+        res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(parcels));
     });
 
@@ -13,6 +14,7 @@ module.exports = function (app, router, parcels) {
      * Create a new parcel.
      */
     router.post('/parcels', function (req, res) {
+        res.setHeader('Content-Type', 'application/json');
         if (req.body.id !== undefined && req.body.weight !== undefined) {
 
             let parcelCheckId = parcels.find(x => x.id === req.body.id);
@@ -24,13 +26,13 @@ module.exports = function (app, router, parcels) {
                 parcel.setLength(req.body.length);
                 parcel.setDepth(req.body.depth);
                 parcels.push(parcel);
-                res.write('Parcel has been created');
+                res.write(JSON.stringify({'success:': 'Parcel has been created.'}));
             } else {
-                res.write('Parcel ID must be unique');
+                res.write(JSON.stringify({'error:': 'Parcel ID must be unique.'}));
             }
 
         } else {
-            res.write(JSON.stringify('Parcel ID & parcel weight are required.'));
+            res.write(JSON.stringify({'error:': 'Parcel ID & parcel weight are required.'}));
         }
 
         res.end();

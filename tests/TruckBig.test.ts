@@ -183,6 +183,8 @@ describe('truckBig tests', function () {
         } catch (e) {
             assert.strictEqual(e, 'Parcel weight is required');
         }
+
+
     });
 
     it('truckBig verify === false because trucks parcels IDs are not unique', function () {
