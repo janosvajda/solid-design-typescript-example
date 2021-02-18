@@ -20,13 +20,17 @@ module.exports = function (app, router, parcels) {
             let parcelCheckId = parcels.find(x => x.id === req.body.id);
 
             if (parcelCheckId === undefined) {
-                let parcel = new StandardParcel();
-                parcel.setParcelId(req.body.id);
-                parcel.setWeight(req.body.weight);
-                parcel.setLength(req.body.length);
-                parcel.setDepth(req.body.depth);
-                parcels.push(parcel);
-                res.write(JSON.stringify({'success:': 'Parcel has been created.'}));
+                try {
+                    let parcel = new StandardParcel();
+                    parcel.setParcelId(req.body.id);
+                    parcel.setWeight(req.body.weight);
+                    parcel.setLength(req.body.length);
+                    parcel.setDepth(req.body.depth);
+                    parcels.push(parcel);
+                    res.write(JSON.stringify({'success:': 'Parcel has been created.'}));
+                } catch (e) {
+                    res.write(JSON.stringify({'error:': e}));
+                }
             } else {
                 res.write(JSON.stringify({'error:': 'Parcel ID must be unique.'}));
             }

@@ -80,6 +80,7 @@ export class BaseVehicle implements IVehicle {
     }
 
     setWeight(value: number) {
+        if (isNaN(value)) throw 'Weight must be numeric.';
         this.weight = value;
     }
 

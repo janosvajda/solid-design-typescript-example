@@ -50,6 +50,7 @@ export class StandardParcel implements IParcel {
     }
 
     setWeight(value: number) {
+        if (isNaN(value)) throw 'Weight must be numeric.';
         this.weight = value;
     }
 

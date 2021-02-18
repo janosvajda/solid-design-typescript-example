@@ -29,11 +29,15 @@ module.exports = function (app, router, trucks, parcels) {
             let searchTruckByID = trucks.find(t => t.id === req.body.id);
 
             if (searchTruckByID === undefined) {
-                let truck = new TruckBig();
-                truck.setId(req.body.id);
-                truck.setWeight(req.body.weight);
-                trucks.push(truck);
-                res.write(JSON.stringify({'success:': 'Truck was created.'}));
+                try {
+                    let truck = new TruckBig();
+                    truck.setId(req.body.id);
+                    truck.setWeight(req.body.weight);
+                    trucks.push(truck);
+                    res.write(JSON.stringify({'success:': 'Truck was created.'}));
+                } catch (e) {
+                    res.write(JSON.stringify({'error:': e}));
+                }
             } else {
                 res.write(JSON.stringify({'error:': 'This truck ID is exists.'}));
             }
@@ -58,7 +62,7 @@ module.exports = function (app, router, trucks, parcels) {
                         let valid = truck.checkParcels();
                         if (valid) {
                             truck.addParcel(parcel);
-                            res.write(JSON.stringify(truck));
+                            res.write(JSON.stringify({'success:': 'Parcel has been added to: ' + truck.getId()}));
                         } else {
                             res.write(JSON.stringify({'error:': 'Parcel is not valid: check parcel weight, please. It is required.'}));
                         }
