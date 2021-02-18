@@ -136,6 +136,4 @@ export class BaseVehicle implements IVehicle {
 
         return true;
     }
-
-
 }
