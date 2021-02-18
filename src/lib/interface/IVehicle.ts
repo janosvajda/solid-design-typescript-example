@@ -69,5 +69,5 @@ export interface IVehicle {
     /**
      * Verify the whole vehicle.
      */
-    checkParcels() : boolean
+    checkParcels(): boolean
 }
