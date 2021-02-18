@@ -81,7 +81,7 @@ module.exports = function (app, router, trucks, parcels) {
     router.delete('/trucks', function (req, res) {
         res.setHeader('Content-Type', 'application/json');
         let truck = trucks.find(t => t.id === req.body.truck_id);
-        if (truck){
+        if (truck) {
             let parcel = parcels.find(p => p.id === req.body.parcel_id);
             if (parcel) {
                 truck.removeParcel(parcel.getParcelId());
