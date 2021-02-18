@@ -27,7 +27,15 @@ export class TruckBig implements IVehicle {
     }
 
     addParcel(parcel: IParcel) {
-        this.parcels.push(parcel);
+
+        let parcels = this.getParcels();
+        let parcelItem = (Object.values(parcels)).find(p => p.getParcelId() === parcel.getParcelId());
+
+        if ( parcelItem === undefined) {
+            this.parcels.push(parcel);
+        } else {
+             throw 'Parcel has been added to this vehicle';
+        }
     }
 
     /**
@@ -96,15 +104,19 @@ export class TruckBig implements IVehicle {
 
     /**
      * Each parcels must have unique parcelId on the truck.
+     * @deprecated This is deprectaed and not in use anymore.
      */
     hasParcelsUniqueId() {
         let uniqueItems = []
+
         Object.values(this.getParcels()).forEach(parcel => {
             uniqueItems.push(parcel.getParcelId());
         });
-        if (new Set(uniqueItems).size !== uniqueItems.length) {
+
+        if (new Set(uniqueItems).size !== Object.values(this.getParcels()).length) {
             return false;
         }
+
         return true;
     }
 
@@ -122,9 +134,6 @@ export class TruckBig implements IVehicle {
 
         //Truck weight must be added
         if (this.getWeight() === undefined || this.getWeight() === null) return false;
-
-        //Each parcel must have unique parcel ID.
-        if (!this.hasParcelsUniqueId()) return false;
 
         return true;
     }

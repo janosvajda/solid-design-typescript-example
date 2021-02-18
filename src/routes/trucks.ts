@@ -1,6 +1,6 @@
 import {TruckBig} from "../lib/class/TruckBig";
 
-module.exports = function (app, router, trucks) {
+module.exports = function (app, router, trucks, parcels) {
     /**
      * List all trucks.
      */
@@ -15,7 +15,7 @@ module.exports = function (app, router, trucks) {
 
         if (req.body.id !== undefined && req.body.weight !== undefined) {
 
-            let searchTruckByID = trucks.find(x => x.id === req.body.id);
+            let searchTruckByID = trucks.find(t => t.id === req.body.id);
 
             if (searchTruckByID === undefined) {
                 let truck = new TruckBig();
@@ -33,4 +33,28 @@ module.exports = function (app, router, trucks) {
         res.end();
     })
 
-}
+    /**
+     * Loading new parcel into truck.
+     */
+    router.put('/trucks', function (req, res) {
+        if (req.body.truck_id !== undefined && req.body.parcel_id !== undefined) {
+            let truck = trucks.find(t => t.id === req.body.truck_id);
+            let parcel = parcels.find(p => p.id === req.body.parcel_id);
+
+            try {
+                let valid = truck.checkParcels();
+                if (valid) {
+                    truck.addParcel(parcel);
+                    res.write(JSON.stringify(truck));
+                } else {
+                    res.write('Parcel duplicated');
+                }
+            } catch (e) {
+                res.write(JSON.stringify(e));
+            }
+
+            res.end();
+        }
+    })
+
+    }

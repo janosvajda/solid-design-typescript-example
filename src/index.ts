@@ -6,7 +6,7 @@ const formData = require("express-form-data");
 let parcels = [];
 let trucks = [];
 
-// Create a new express app instance
+// Create a new Express app instance
 const app: express.Application = express();
 
 const router = express.Router();
@@ -23,7 +23,7 @@ app.use(formData.union());
 /**
  * Routing for trucks.
  */
-require('./routes/trucks')(app, router, trucks);
+require('./routes/trucks')(app, router, trucks, parcels);
 
 /**
  * Routings for parcels.

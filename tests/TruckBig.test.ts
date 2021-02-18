@@ -103,16 +103,11 @@ describe('truckBig tests', function () {
         parcel3.setParcelId(3);
         parcel3.setWeight(4.11);
 
-        let parcel4 = new StandardParcel();
-        parcel4.setParcelId(2);
-        parcel4.setWeight(0.16);
-
         truckBigTestCountOfParcels.addParcel(parcel1);
         truckBigTestCountOfParcels.addParcel(parcel2);
         truckBigTestCountOfParcels.addParcel(parcel3);
-        truckBigTestCountOfParcels.addParcel(parcel4);
 
-        assert.strictEqual(4, truckBigTestCountOfParcels.getLoadedParcelCount());
+        assert.strictEqual(3, truckBigTestCountOfParcels.getLoadedParcelCount());
     });
 
     it('truckBig verify === true', function () {
@@ -202,17 +197,20 @@ describe('truckBig tests', function () {
         parcel2.setParcelId(1);
         parcel2.setWeight(12.3);
 
-        truckBigTestVerifyFailed.addParcel(parcel1);
-        truckBigTestVerifyFailed.addParcel(parcel2);
+        let parcel3 = new StandardParcel();
+        parcel2.setParcelId(3);
+        parcel2.setWeight(17.3);
 
         truckBigTestVerifyFailed.setWeight(1234.5); //truck weight must be added
 
-        try {
-            let valid = truckBigTestVerifyFailed.checkParcels();
-            assert.strictEqual(false, valid);
+        let valid = truckBigTestVerifyFailed.checkParcels();
+        truckBigTestVerifyFailed.addParcel(parcel1);
+        truckBigTestVerifyFailed.addParcel(parcel3);
 
+        try {
+            truckBigTestVerifyFailed.addParcel(parcel2);
         } catch (e) {
-            assert.strictEqual(e, 'Parcel weight is required');
+            assert.strictEqual(e, 'Parcel has been added to this vehicle');
         }
     });
 
